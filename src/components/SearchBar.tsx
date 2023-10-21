@@ -4,8 +4,9 @@ import { validateInput } from "../utils/validateInput";
 import { Button, FormControl, FormHelperText, Input, Stack } from "@mui/joy";
 import SearchIcon from "@mui/icons-material/Search";
 import { InfoOutlined } from "@mui/icons-material";
+import CountryCard from "./CountryCard";
 
-const SearchBar = () => {
+const SearchBar: React.FC = () => {
   const [input, setInput] = useState("");
   const [country, setCountry] = useState(null);
 
@@ -55,6 +56,7 @@ const SearchBar = () => {
           </FormControl>
         )}
       </form>
+      <div>{country && <CountryCard country={country} />}</div>
     </>
   );
 };
