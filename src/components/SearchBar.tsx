@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { getCountry } from "../services/RestCountries";
+import { validateInput } from "../utils/validateInput";
 import { Button, FormControl, Input, Stack } from "@mui/joy";
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -7,9 +8,16 @@ const SearchBar = () => {
   const [input, setInput] = useState("");
   const [country, setCountry] = useState(null);
 
-  const handleSearch = async () => {
-    const country = await getCountry(input);
-    setCountry(country[0]);
+  const handleSearch = async (event: any) => {
+    event.preventDefault();
+    if (validateInput(input)) {
+      const country = await getCountry(input);
+      if (country) {
+        setCountry(country[0]);
+      } else {
+        setCountry(null);
+      }
+    }
   };
 
   return (
@@ -28,7 +36,12 @@ const SearchBar = () => {
             />
           </FormControl>
 
-          <Button onClick={handleSearch} type="submit" variant="soft">
+          <Button
+            onClick={handleSearch}
+            disabled={!validateInput(input)}
+            type="submit"
+            variant="soft"
+          >
             Search
           </Button>
         </Stack>
