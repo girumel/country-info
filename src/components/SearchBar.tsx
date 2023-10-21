@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { getCountry } from "../services/RestCountries";
 import { validateInput } from "../utils/validateInput";
-import { Button, FormControl, Input, Stack } from "@mui/joy";
+import { Button, FormControl, FormHelperText, Input, Stack } from "@mui/joy";
 import SearchIcon from "@mui/icons-material/Search";
+import { InfoOutlined } from "@mui/icons-material";
 
 const SearchBar = () => {
   const [input, setInput] = useState("");
@@ -45,6 +46,14 @@ const SearchBar = () => {
             Search
           </Button>
         </Stack>
+        {!validateInput(input) && (
+          <FormControl error>
+            <FormHelperText>
+              <InfoOutlined fontSize="small" />
+              Please enter a valid country name
+            </FormHelperText>
+          </FormControl>
+        )}
       </form>
     </>
   );
