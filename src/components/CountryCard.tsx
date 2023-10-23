@@ -18,6 +18,15 @@ interface Country {
   population: number;
   area: number;
   latlng: number[];
+  languages: {
+    [key: string]: string;
+  };
+  currencies: {
+    [key: string]: {
+      name: string;
+    };
+  };
+  subregion: string;
 }
 
 interface CountryProps {
@@ -25,7 +34,17 @@ interface CountryProps {
 }
 
 const CountryCard: React.FC<CountryProps> = ({ country }) => {
-  const { name, capital, flags, population, area, latlng } = country;
+  const {
+    name,
+    capital,
+    flags,
+    population,
+    area,
+    latlng,
+    languages,
+    currencies,
+    subregion,
+  } = country;
   return (
     <Box
       className="country-card"
@@ -37,10 +56,10 @@ const CountryCard: React.FC<CountryProps> = ({ country }) => {
       }}
     >
       <Card orientation="horizontal">
-        <CardContent>
           <AspectRatio flex ratio="1" maxHeight={160} sx={{ minWidth: 320 }}>
             <img src={flags.png} loading="lazy" alt={flags.alt} />
           </AspectRatio>
+          <CardContent>
           <Typography fontSize="xl" fontWeight="lg">
             {name.common},{" "}
             <Typography
@@ -85,6 +104,43 @@ const CountryCard: React.FC<CountryProps> = ({ country }) => {
               <Typography fontWeight="lg">
                 {latlng[0]}, {latlng[1]}
               </Typography>
+            </div>
+          </Sheet>
+          
+          <Sheet
+            sx={{
+              bgcolor: "background.level1",
+              borderRadius: "sm",
+              p: 1.5,
+              my: 1.5,
+              display: "flex",
+              gap: 2,
+              "& > div": { flex: 1 },
+            }}
+          >
+            <div>
+              <Typography level="body-xs" fontWeight="lg">
+                Languages
+              </Typography>
+              <Typography fontWeight="lg">
+                {Object.values(languages).join(", ")}
+              </Typography>
+            </div>
+            <div>
+              <Typography level="body-xs" fontWeight="lg">
+                Currencies
+              </Typography>
+              <Typography fontWeight="lg">
+                {Object.values(currencies)
+                  .map((currency) => currency.name)
+                  .join(", ")}
+              </Typography>
+            </div>
+            <div>
+              <Typography level="body-xs" fontWeight="lg">
+                Subregion
+              </Typography>
+              <Typography fontWeight="lg">{subregion}</Typography>
             </div>
           </Sheet>
         </CardContent>
