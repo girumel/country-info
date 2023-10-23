@@ -5,6 +5,7 @@ import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
+import { Chip } from "@mui/joy";
 
 interface Country {
   name: {
@@ -26,6 +27,7 @@ interface Country {
       name: string;
     };
   };
+  region: string;
   subregion: string;
 }
 
@@ -43,8 +45,10 @@ const CountryCard: React.FC<CountryProps> = ({ country }) => {
     latlng,
     languages,
     currencies,
+    region,
     subregion,
   } = country;
+
   return (
     <Box
       className="country-card"
@@ -56,10 +60,10 @@ const CountryCard: React.FC<CountryProps> = ({ country }) => {
       }}
     >
       <Card orientation="horizontal">
-          <AspectRatio flex ratio="1" maxHeight={160} sx={{ minWidth: 320 }}>
-            <img src={flags.png} loading="lazy" alt={flags.alt} />
-          </AspectRatio>
-          <CardContent>
+        <AspectRatio flex ratio="1" maxHeight={160} sx={{ minWidth: 320 }}>
+          <img src={flags.png} loading="lazy" alt={flags.alt} />
+        </AspectRatio>
+        <CardContent>
           <Typography fontSize="xl" fontWeight="lg">
             {name.common},{" "}
             <Typography
@@ -106,7 +110,7 @@ const CountryCard: React.FC<CountryProps> = ({ country }) => {
               </Typography>
             </div>
           </Sheet>
-          
+
           <Sheet
             sx={{
               bgcolor: "background.level1",
@@ -143,6 +147,15 @@ const CountryCard: React.FC<CountryProps> = ({ country }) => {
               <Typography fontWeight="lg">{subregion}</Typography>
             </div>
           </Sheet>
+          <Chip
+            component="span"
+            size="sm"
+            variant="soft"
+            color="success"
+            sx={{ position: "absolute", top: 0, right: 0, m: 1 }}
+          >
+            {region}
+          </Chip>
         </CardContent>
       </Card>
     </Box>
