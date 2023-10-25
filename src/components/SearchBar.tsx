@@ -12,12 +12,14 @@ const SearchBar: React.FC = () => {
 
   const handleSearch = async (event: any) => {
     event.preventDefault();
-    if (validateInput(input)) {
-      const country = await getCountry(input);
-      if (country) {
-        setCountry(country[0]);
-      } else {
-        setCountry(null);
+    if (!validateInput(input)) {
+      setCountry(null);
+    } else {
+        const country = await getCountry(input);
+        if (country) {
+          setCountry(country[0]);
+        } else {
+          setCountry(null);
       }
     }
   };
@@ -48,7 +50,7 @@ const SearchBar: React.FC = () => {
           </Button>
         </Stack>
         {!validateInput(input) && (
-          <FormControl error>
+          <FormControl>
             <FormHelperText>
               <InfoOutlined fontSize="small" />
               Please enter a valid country name
@@ -60,4 +62,5 @@ const SearchBar: React.FC = () => {
     </>
   );
 };
+
 export default SearchBar;
