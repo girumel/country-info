@@ -22,6 +22,10 @@ The application is built using React with TypeScript, and it uses the Axios libr
 4. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 5. Enter a country name in the search bar and click the search button to view the country's information.
 
+## Screenshot
+
+![Screenshot](./screenshot.png)
+
 ## Credits
 
 - [REST Countries API](https://restcountries.eu/)
